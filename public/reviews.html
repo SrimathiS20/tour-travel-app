@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
-            background-color: #f0f0f0; /* Light grey background for the entire page */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-image: url('/public/images/reviews.jpg'); /* Add the path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         header {
-            background-color: #333; /* Dark background for the header */
+            background-color: rgba(51, 51, 51, 0.8); /* Dark header with transparency */
             color: white;
             padding: 10px 0;
         }
@@ -34,58 +37,87 @@
         nav ul li a {
             color: white;
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
         }
 
         main {
-            padding: 20px;
-            background-color: #ffffff; /* White background for the main content */
+            padding: 30px;
             text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Slight white background for contrast */
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: 20px auto;
         }
 
-        h1 {
-            margin-bottom: 30px;
-            font-size: 2.5em;
+        main h1 {
+            font-size: 2.5rem;
             color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
         .review-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            gap: 20px;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .review {
-            background-color: #fff; /* White background for each review */
+            background: rgba(255, 255, 255, 0.9); /* Slight white background */
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 10px;
-            width: 80%;
-            max-width: 600px;
-            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1.5s ease-in-out;
         }
 
         .review h3 {
-            margin: 0;
-            font-size: 1.2em;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #007bff; /* Blue color for review titles */
         }
 
         .review p {
+            font-size: 1rem;
+            color: #333;
             margin: 10px 0;
-            color: #555;
         }
 
         .rating {
-            font-size: 1.1em;
-            color: #ffcc00;
+            font-size: 1.2rem;
+            color: #ffcc00; /* Gold color for stars */
+            margin: 5px 0;
         }
 
         .reviewer-name {
             font-weight: bold;
-            color: #333;
+            font-style: italic;
+            color: #e63946; /* Distinct red color for reviewer names */
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -93,9 +125,9 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="packages.html">Packages</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="packages.html">Packages</a></li>
                 <li><a href="reviews.html">Reviews</a></li>
                 <li><a href="about.html">About Us</a></li>
             </ul>
@@ -107,26 +139,20 @@
             <div class="review">
                 <h3>Beautiful Experience in Bali</h3>
                 <p class="rating">★★★★★</p>
-                <p class="review-text">"I had an amazing time in Bali! The trip was well-organized, and the sights were breathtaking. Highly recommend this tour to anyone looking to explore Bali!"</p>
+                <p>"I had an amazing time in Bali! The trip was well-organized, and the sights were breathtaking. Highly recommend this tour to anyone looking to explore Bali!"</p>
                 <p class="reviewer-name">- Sarah L.</p>
             </div>
             <div class="review">
                 <h3>Memorable Trip to Switzerland</h3>
                 <p class="rating">★★★★★</p>
-                <p class="review-text">"Switzerland was a dream come true. The tours were fantastic, and the guides were knowledgeable and friendly. It was truly a once-in-a-lifetime experience!"</p>
+                <p>"Switzerland was a dream come true. The tours were fantastic, and the guides were knowledgeable and friendly. It was truly a once-in-a-lifetime experience!"</p>
                 <p class="reviewer-name">- Mark T.</p>
             </div>
             <div class="review">
                 <h3>Great Experience in Paris</h3>
                 <p class="rating">★★★★☆</p>
-                <p class="review-text">"The tour in Paris was great. We got to see all the major attractions, and the food was fantastic. Some tours felt a little rushed, but overall it was a wonderful experience."</p>
+                <p>"The tour in Paris was great. We got to see all the major attractions, and the food was fantastic. Some tours felt a little rushed, but overall it was a wonderful experience."</p>
                 <p class="reviewer-name">- Emily R.</p>
-            </div>
-            <div class="review">
-                <h3>Incredible Vacation in Japan</h3>
-                <p class="rating">★★★★★</p>
-                <p class="review-text">"Japan exceeded all expectations! The culture, food, and sights were beyond amazing. I can't wait to go back for another tour!"</p>
-                <p class="reviewer-name">- John P.</p>
             </div>
         </div>
     </main>
