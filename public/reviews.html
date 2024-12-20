@@ -1,160 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reviews - Tour and Travel</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url('/public/images/reviews.jpg'); /* Add the path to your background image */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("/public/images/reviews.jpg"); /* Add the path to your background image */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
 
-        header {
-            background-color: rgba(51, 51, 51, 0.8); /* Dark header with transparency */
-            color: white;
-            padding: 10px 0;
-        }
+      header {
+        background-color: rgba(
+          51,
+          51,
+          51,
+          0.8
+        ); /* Dark header with transparency */
+        color: white;
+        padding: 10px 0;
+      }
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+      }
 
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
+      nav ul li {
+        display: inline;
+        margin: 0 15px;
+      }
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
 
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
 
-        main {
-            padding: 30px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8); /* Slight white background for contrast */
-            border-radius: 10px;
-            max-width: 1000px;
-            margin: 20px auto;
-        }
+      main {
+        padding: 30px;
+        text-align: center;
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* Slight white background for contrast */
+        border-radius: 10px;
+        max-width: 1000px;
+        margin: 20px auto;
+      }
 
-        main h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+      main h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+      }
 
-        .review-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
+      .review-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        animation: fadeIn 1.5s ease-in-out;
+      }
 
-        .review {
-            background: rgba(255, 255, 255, 0.9); /* Slight white background */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            animation: slideIn 1.5s ease-in-out;
-        }
+      .review {
+        background: rgba(255, 255, 255, 0.9); /* Slight white background */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: slideIn 1.5s ease-in-out;
+      }
 
-        .review h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #007bff; /* Blue color for review titles */
-        }
+      .review h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #007bff; /* Blue color for review titles */
+      }
 
-        .review p {
-            font-size: 1rem;
-            color: #333;
-            margin: 10px 0;
-        }
+      .review p {
+        font-size: 1rem;
+        color: #333;
+        margin: 10px 0;
+      }
 
-        .rating {
-            font-size: 1.2rem;
-            color: #ffcc00; /* Gold color for stars */
-            margin: 5px 0;
-        }
+      .rating {
+        font-size: 1.2rem;
+        color: #ffcc00; /* Gold color for stars */
+        margin: 5px 0;
+      }
 
-        .reviewer-name {
-            font-weight: bold;
-            font-style: italic;
-            color: #e63946; /* Distinct red color for reviewer names */
-        }
+      .reviewer-name {
+        font-weight: bold;
+        font-style: italic;
+        color: #e63946; /* Distinct red color for reviewer names */
+      }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
+        to {
+          opacity: 1;
+        }
+      }
 
-        @keyframes slideIn {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+      @keyframes slideIn {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
         }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="packages.html">Packages</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="about.html">About Us</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="packages.html">Packages</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <h1>Customer Reviews</h1>
-        <div class="review-container">
-            <div class="review">
-                <h3>Beautiful Experience in Bali</h3>
-                <p class="rating">★★★★★</p>
-                <p>"I had an amazing time in Bali! The trip was well-organized, and the sights were breathtaking. Highly recommend this tour to anyone looking to explore Bali!"</p>
-                <p class="reviewer-name">- Sarah L.</p>
-            </div>
-            <div class="review">
-                <h3>Memorable Trip to Switzerland</h3>
-                <p class="rating">★★★★★</p>
-                <p>"Switzerland was a dream come true. The tours were fantastic, and the guides were knowledgeable and friendly. It was truly a once-in-a-lifetime experience!"</p>
-                <p class="reviewer-name">- Mark T.</p>
-            </div>
-            <div class="review">
-                <h3>Great Experience in Paris</h3>
-                <p class="rating">★★★★☆</p>
-                <p>"The tour in Paris was great. We got to see all the major attractions, and the food was fantastic. Some tours felt a little rushed, but overall it was a wonderful experience."</p>
-                <p class="reviewer-name">- Emily R.</p>
-            </div>
+      <h1>Customer Reviews</h1>
+      <div class="review-container">
+        <div class="review">
+          <h3>Beautiful Experience in Bali</h3>
+          <p class="rating">★★★★★</p>
+          <p>
+            "I had an amazing time in Bali! The trip was well-organized, and the
+            sights were breathtaking. Highly recommend this tour to anyone
+            looking to explore Bali!"
+          </p>
+          <p class="reviewer-name">- Sarah L.</p>
         </div>
+        <div class="review">
+          <h3>Memorable Trip to Switzerland</h3>
+          <p class="rating">★★★★★</p>
+          <p>
+            "Switzerland was a dream come true. The tours were fantastic, and
+            the guides were knowledgeable and friendly. It was truly a
+            once-in-a-lifetime experience!"
+          </p>
+          <p class="reviewer-name">- Mark T.</p>
+        </div>
+        <div class="review">
+          <h3>Great Experience in Paris</h3>
+          <p class="rating">★★★★☆</p>
+          <p>
+            "The tour in Paris was great. We got to see all the major
+            attractions, and the food was fantastic. Some tours felt a little
+            rushed, but overall it was a wonderful experience."
+          </p>
+          <p class="reviewer-name">- Emily R.</p>
+        </div>
+      </div>
     </main>
-</body>
+  </body>
 </html>

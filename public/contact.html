@@ -1,180 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us - Tour and Travel</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url('/public/images/contact.jpg'); /* Add the path to your background image */
-            background-size: cover; /* Ensure the image covers the entire page */
-            background-position: center; /* Center the image */
-            background-attachment: fixed; /* Keep the image fixed when scrolling */
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("/public/images/contact.jpg"); /* Add the path to your background image */
+        background-size: cover; /* Ensure the image covers the entire page */
+        background-position: center; /* Center the image */
+        background-attachment: fixed; /* Keep the image fixed when scrolling */
+      }
 
-        header {
-            background-color: rgba(51, 51, 51, 0.8); /* Dark header with transparency */
-            color: white;
-            padding: 10px 0;
-        }
+      header {
+        background-color: rgba(
+          51,
+          51,
+          51,
+          0.8
+        ); /* Dark header with transparency */
+        color: white;
+        padding: 10px 0;
+      }
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+      }
 
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
+      nav ul li {
+        display: inline;
+        margin: 0 15px;
+      }
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
 
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
 
-        main {
-            padding: 30px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8); /* Slight white background to contrast with the image */
-            border-radius: 10px;
-            max-width: 1000px;
-            margin: 20px auto;
-        }
+      main {
+        padding: 30px;
+        text-align: center;
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* Slight white background to contrast with the image */
+        border-radius: 10px;
+        max-width: 1000px;
+        margin: 20px auto;
+      }
 
-        main h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+      main h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+      }
 
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            animation: slideIn 1.5s ease-in-out;
-        }
+      .form-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: slideIn 1.5s ease-in-out;
+      }
 
-        .form-container form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+      .form-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
 
-        .form-container label {
-            font-weight: bold;
-            text-align: left;
-        }
+      .form-container label {
+        font-weight: bold;
+        text-align: left;
+      }
 
-        .form-container input, .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+      .form-container input,
+      .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
 
-        .form-container textarea {
-            resize: vertical;
-        }
+      .form-container textarea {
+        resize: vertical;
+      }
 
-        .form-container button {
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
+      .form-container button {
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
 
-        .form-container button:hover {
-            background-color: #0056b3;
-        }
+      .form-container button:hover {
+        background-color: #0056b3;
+      }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="packages.html">Packages</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="about.html">About Us</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="packages.html">Packages</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <h1>Contact Us</h1>
+      <h1>Contact Us</h1>
 
-        <div class="form-container">
-            <h2>Get in Touch</h2>
-            <form id="contactForm">
-                <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      <div class="form-container">
+        <h2>Get in Touch</h2>
+        <form id="contactForm">
+          <label for="name">Your Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            required
+          />
 
-                <label for="email">Your Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          <label for="email">Your Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
 
-                <label for="message">Your Message:</label>
-                <textarea id="message" name="message" placeholder="Write your message here" rows="4" required></textarea>
+          <label for="message">Your Message:</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Write your message here"
+            rows="4"
+            required
+          ></textarea>
 
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
     </main>
 
     <script src="js/main.js"></script>
     <script>
-        // Contact Form Submission Logic
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+      // Contact Form Submission Logic
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
 
-            fetch('/submit-contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, email, message })
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const message = document.getElementById("message").value;
+
+          fetch("/submit-contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, email, message }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data.message);
+              alert("Your message has been sent successfully!");
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message);
-                alert('Your message has been sent successfully!');
-            })
-            .catch(error => console.error('Error:', error));
+            .catch((error) => console.error("Error:", error));
         });
     </script>
-</body>
+  </body>
 </html>
