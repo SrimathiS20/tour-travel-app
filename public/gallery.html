@@ -1,11 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gallery - Tour and Travel</title>
+<title>Gallery - Tour and Travel</title>
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/styles.css" />
-    <style>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery .gallery-item {
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .place-name {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .offer {
+            color: #ff5733;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .offers-container {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
       body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f9;
@@ -113,10 +224,22 @@
         border-radius: 5px;
         margin-top: 15px;
       }
-    </style>
+</style>
+</head>
+<body>
   </head>
   <body>
-    <header>
+<header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+        </nav>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -127,8 +250,19 @@
           <li><a href="about.html">About Us</a></li>
         </ul>
       </nav>
-    </header>
-    <main>
+</header>
+<main>
+        <h1>Tourist Destination Gallery</h1>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="images/switzerland.jpg" alt="Switzerland">
+                <div class="place-name">Switzerland</div>
+                <div class="description">Explore the beautiful landscapes, lakes, and mountains of Switzerland. A place for nature lovers!</div>
+                <div class="price">Price: $2000</div>
+                <div class="offers-container">
+                    <div class="offer">Special Offer: 20% off on early bookings!</div>
+                </div>
+            </div>
       <h1>Tourist Destination Gallery</h1>
       <div class="gallery">
         <div class="gallery-item">
@@ -144,6 +278,14 @@
           </div>
         </div>
 
+            <div class="gallery-item">
+                <img src="images/ireland.jpg" alt="Ireland">
+                <div class="place-name">Ireland</div>
+                <div class="description">Experience the charm of Irish countryside, castles, and the rolling green hills.</div>
+                <div class="price">Price: $1500</div>
+                <div class="offers-container">
+                    <div class="offer">Special Offer: Free guided tour with every booking!</div>
+                </div>
         <div class="gallery-item">
           <img src="images/ireland.jpg" alt="Ireland" />
           <div class="place-name">Ireland</div>
@@ -155,10 +297,18 @@
           <div class="offers-container">
             <div class="offer">
               Special Offer: Free guided tour with every booking!
-            </div>
+</div>
           </div>
         </div>
 
+            <div class="gallery-item">
+                <img src="images/bali.jpg" alt="Bali">
+                <div class="place-name">Bali</div>
+                <div class="description">Visit Bali’s stunning beaches, temples, and vibrant culture. Ideal for relaxation and adventure.</div>
+                <div class="price">Price: $1200</div>
+                <div class="offers-container">
+                    <div class="offer">Special Offer: 15% off for honeymoon couples!</div>
+                </div>
         <div class="gallery-item">
           <img src="images/bali.jpg" alt="Bali" />
           <div class="place-name">Bali</div>
@@ -170,10 +320,18 @@
           <div class="offers-container">
             <div class="offer">
               Special Offer: 15% off for honeymoon couples!
-            </div>
+</div>
           </div>
         </div>
 
+            <div class="gallery-item">
+                <img src="images/paris.jpg" alt="Paris">
+                <div class="place-name">Paris</div>
+                <div class="description">Tour the City of Lights with visits to the Eiffel Tower, Louvre, and more!</div>
+                <div class="price">Price: $1800</div>
+                <div class="offers-container">
+                    <div class="offer">Special Offer: Complimentary Seine River Cruise!</div>
+                </div>
         <div class="gallery-item">
           <img src="images/paris.jpg" alt="Paris" />
           <div class="place-name">Paris</div>
@@ -185,10 +343,18 @@
           <div class="offers-container">
             <div class="offer">
               Special Offer: Complimentary Seine River Cruise!
-            </div>
+</div>
           </div>
         </div>
 
+            <div class="gallery-item">
+                <img src="images/japan.jpg" alt="Japan">
+                <div class="place-name">Japan</div>
+                <div class="description">Discover the unique culture, technology, and beauty of Japan. Visit temples, mount Fuji, and more.</div>
+                <div class="price">Price: $2500</div>
+                <div class="offers-container">
+                    <div class="offer">Special Offer: Free Tokyo Disneyland ticket!</div>
+                </div>
         <div class="gallery-item">
           <img src="images/japan.jpg" alt="Japan" />
           <div class="place-name">Japan</div>
@@ -200,10 +366,18 @@
           <div class="offers-container">
             <div class="offer">
               Special Offer: Free Tokyo Disneyland ticket!
-            </div>
+</div>
           </div>
         </div>
 
+            <div class="gallery-item">
+                <img src="images/newyork.jpg" alt="New York">
+                <div class="place-name">New York</div>
+                <div class="description">Experience the hustle and bustle of the Big Apple. Enjoy Broadway, Central Park, and iconic landmarks.</div>
+                <div class="price">Price: $2200</div>
+                <div class="offers-container">
+                    <div class="offer">Special Offer: 10% off on Broadway show tickets!</div>
+                </div>
         <div class="gallery-item">
           <img src="images/newyork.jpg" alt="New York" />
           <div class="place-name">New York</div>
@@ -215,10 +389,19 @@
           <div class="offers-container">
             <div class="offer">
               Special Offer: 10% off on Broadway show tickets!
-            </div>
+</div>
           </div>
         </div>
 
+            <div class="gallery-item">
+                <img src="images/sydney.jpg" alt="Sydney">
+                <div class="place-name">Sydney</div>
+                <div class="description">Discover the beautiful city of Sydney with its Opera House, beaches, and vibrant culture.</div>
+                <div class="price">Price: $1700</div>
+                <div class="offers-container">
+                    <div class="offer">Special Offer: Free Sydney Harbour Cruise!</div>
+                </div>
+            </div>
         <div class="gallery-item">
           <img src="images/sydney.jpg" alt="Sydney" />
           <div class="place-name">Sydney</div>
@@ -232,6 +415,14 @@
           </div>
         </div>
 
+            <div class="gallery-item">
+                <img src="images/italy.jpg" alt="Italy">
+                <div class="place-name">Italy</div>
+                <div class="description">Explore the history, art, and cuisine of Italy. Visit Rome, Venice, Florence, and more!</div>
+                <div class="price">Price: $2300</div>
+                <div class="offers-container">
+                    <div class="offer">Special Offer: Free guided tours in Rome and Venice!</div>
+                </div>
         <div class="gallery-item">
           <img src="images/italy.jpg" alt="Italy" />
           <div class="place-name">Italy</div>
@@ -243,10 +434,11 @@
           <div class="offers-container">
             <div class="offer">
               Special Offer: Free guided tours in Rome and Venice!
-            </div>
+</div>
           </div>
-        </div>
+</div>
       </div>
-    </main>
+</main>
+</body>
   </body>
 </html>
