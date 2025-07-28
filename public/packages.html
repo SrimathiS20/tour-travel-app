@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Packages - Tour and Travel</title>
+  <title>Travel Packages - Tour and Travel</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-image: url("images/pack.png");
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/pack.png');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      min-height: 100vh;
+      color: white;
     }
 
     header {
-      background-color: rgba(51, 51, 51, 0.8);
-      color: white;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 0;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
       padding: 10px 0;
+      background: rgba(0, 0, 0, 0.95);
     }
 
     nav ul {
@@ -27,94 +40,502 @@
       padding: 0;
       margin: 0;
       text-align: center;
-    }
-
-    nav ul li {
-      display: inline;
-      margin: 0 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
     }
 
-    nav ul li a:hover {
-      text-decoration: underline;
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00e1ff;
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
     }
 
     main {
-      padding: 30px;
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 10px;
-      max-width: 1000px;
-      margin: 20px auto;
-    }
-
-    main h1 {
-      font-size: 2.5rem;
-      color: #333;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-
-    .form-container {
-      max-width: 800px;
+      padding: 120px 20px 40px;
+      max-width: 1400px;
       margin: 0 auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      animation: slideIn 1.5s ease-in-out;
     }
 
-    .form-container form {
+    .filters {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .filter-button {
+      padding: 12px 25px;
+      border: 2px solid #00e1ff;
+      background: transparent;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .filter-button:hover,
+    .filter-button.active {
+      background: #00e1ff;
+      color: black;
+      transform: translateY(-3px);
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .package-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+
+    .package-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .package-image {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .package-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .package-card:hover .package-image img {
+      transform: scale(1.1);
+    }
+
+    .package-details {
+      padding: 25px;
+    }
+
+    .package-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #00e1ff;
+    }
+
+    .package-description {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .package-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .feature i {
+      color: #00e1ff;
+    }
+
+    .package-price {
+      font-size: 2rem;
+      color: #00e1ff;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .package-actions {
+      display: flex;
       gap: 15px;
     }
 
-    .form-container label {
-      font-weight: bold;
-      text-align: left;
-    }
-
-    .form-container input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .form-container button {
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
+    .action-button {
+      flex: 1;
+      padding: 12px;
       border: none;
-      border-radius: 5px;
-      font-size: 1rem;
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
     }
 
-    .form-container button:hover {
-      background-color: #0056b3;
+    .book-now {
+      background: #00e1ff;
+      color: black;
     }
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
+    .book-now:hover {
+      background: #00b3cc;
+      transform: translateY(-3px);
+    }
+
+    .learn-more {
+      background: transparent;
+      border: 2px solid #00e1ff;
+      color: white;
+    }
+
+    .learn-more:hover {
+      background: rgba(0, 225, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .special-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ff3366;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 500;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      50% {
+        transform: scale(1.05);
       }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading::after {
+      content: '';
+      width: 50px;
+      height: 50px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #00e1ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .search-bar {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1.1rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 225, 255, 0.3);
+    }
+
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #00e1ff;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .package-features {
+        grid-template-columns: 1fr;
+      }
+
+      .package-actions {
+        flex-direction: column;
+      }
+    }
+
+    /* Booking Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      position: relative;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .close-modal:hover {
+      color: #00e1ff;
+      transform: rotate(90deg);
+    }
+
+    .booking-form {
+      display: grid;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      color: #00e1ff;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #00e1ff;
+      box-shadow: 0 0 10px rgba(0, 225, 255, 0.3);
+    }
+
+    .submit-booking {
+      background: #00e1ff;
+      color: black;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-booking:hover {
+      background: #00b3cc;
+      transform: translateY(-3px);
+    }
+
+    .success-message,
+    .error-message {
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .success-message {
+      background: rgba(0, 255, 0, 0.2);
+      color: #00ff00;
+    }
+
+    .error-message {
+      background: rgba(255, 0, 0, 0.2);
+      color: #ff0000;
+    }
+
+    /* Admin Section Styles */
+    .admin-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .admin-section h2 {
+      color: #00e1ff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .admin-form {
+      display: grid;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .admin-form .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .admin-form .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .admin-form label {
+      color: #00e1ff;
+      font-weight: 500;
+    }
+
+    .admin-form input,
+    .admin-form select,
+    .admin-form textarea {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .admin-form input:focus,
+    .admin-form select:focus,
+    .admin-form textarea:focus {
+      outline: none;
+      border-color: #00e1ff;
+      box-shadow: 0 0 10px rgba(0, 225, 255, 0.3);
+    }
+
+    .admin-form button {
+      background: #00e1ff;
+      color: black;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 200px;
+      margin: 20px auto 0;
+    }
+
+    .admin-form button:hover {
+      background: #00b3cc;
+      transform: translateY(-3px);
+    }
+
+    .toggle-admin {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00e1ff;
+      color: black;
+      padding: 15px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      z-index: 1000;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .toggle-admin:hover {
+      background: #00b3cc;
+      transform: translateY(-3px);
     }
   </style>
 </head>
 <body>
+  <div class="loading"></div>
+
   <header>
     <nav>
       <ul>
@@ -129,43 +550,361 @@
   </header>
 
   <main>
-    <h1>Our Packages</h1>
-    <div class="form-container">
-      <h2>Choose Your Package</h2>
-      <form id="packageForm">
-        <label for="packageName">Package Name:</label>
-        <input type="text" id="packageName" name="packageName" placeholder="Enter Package Name" required />
+    <div class="admin-section" id="adminSection" style="display: none;">
+      <h2>Add New Travel Package</h2>
+      <div class="success-message" id="adminSuccessMessage"></div>
+      <div class="error-message" id="adminErrorMessage"></div>
+      <form id="adminForm" class="admin-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="packageName">Package Name</label>
+            <input type="text" id="packageName" name="package_name" required>
+          </div>
+          <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" name="destination" required>
+          </div>
+        </div>
 
-        <label for="destination">Destination:</label>
-        <input type="text" id="destination" name="destination" placeholder="Enter Destination" required />
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price">Price ($)</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label for="duration">Duration</label>
+            <input type="text" id="duration" name="duration" placeholder="e.g., 7 Days" required>
+          </div>
+        </div>
 
-        <button type="submit">Submit Package</button>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="meals">Meals</label>
+            <select id="meals" name="meals" required>
+              <option value="All Meals">All Meals</option>
+              <option value="Breakfast Only">Breakfast Only</option>
+              <option value="Breakfast & Dinner">Breakfast & Dinner</option>
+              <option value="Not Included">Not Included</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="accommodation">Accommodation</label>
+            <select id="accommodation" name="accommodation" required>
+              <option value="5 Star Hotel">5 Star Hotel</option>
+              <option value="4 Star Hotel">4 Star Hotel</option>
+              <option value="3 Star Hotel">3 Star Hotel</option>
+              <option value="Resort">Resort</option>
+              <option value="Villa">Villa</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="transportation">Transportation</label>
+            <select id="transportation" name="transportation" required>
+              <option value="Flight Included">Flight Included</option>
+              <option value="Train Included">Train Included</option>
+              <option value="Bus Included">Bus Included</option>
+              <option value="Not Included">Not Included</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+              <option value="Luxury">Luxury</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Family">Family</option>
+              <option value="Honeymoon">Honeymoon</option>
+              <option value="Beach">Beach</option>
+              <option value="Cultural">Cultural</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="specialOffer">Special Offer (Optional)</label>
+          <input type="text" id="specialOffer" name="special_offer" placeholder="e.g., 20% OFF">
+        </div>
+
+        <button type="submit">Add Package</button>
       </form>
+    </div>
+
+    <h1 data-aos="fade-down" style="text-align: center; font-size: 3rem; margin-bottom: 40px; color: #00e1ff;">Explore Our Packages</h1>
+    
+    <div class="search-bar" data-aos="fade-up">
+      <input type="text" class="search-input" placeholder="Search destinations..." id="searchInput">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div class="filters">
+      <button class="filter-button active" data-filter="all">All Packages</button>
+      <button class="filter-button" data-filter="Luxury">Luxury</button>
+      <button class="filter-button" data-filter="Adventure">Adventure</button>
+      <button class="filter-button" data-filter="Family">Family</button>
+      <button class="filter-button" data-filter="Honeymoon">Honeymoon</button>
+      <button class="filter-button" data-filter="Beach">Beach</button>
+      <button class="filter-button" data-filter="Cultural">Cultural</button>
+    </div>
+
+    <div class="packages-grid" id="packagesGrid">
+      <!-- Packages will be loaded here -->
     </div>
   </main>
 
+  <div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 style="color: #00e1ff; margin-bottom: 20px;">Book Your Travel Package</h2>
+      <div class="success-message" id="successMessage"></div>
+      <div class="error-message" id="errorMessage"></div>
+      <form id="bookingForm" class="booking-form">
+        <input type="hidden" id="packageId" name="package_id">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="travelDate">Travel Date</label>
+          <input type="date" id="travelDate" name="travel_date" required>
+        </div>
+        <div class="form-group">
+          <label for="numTravelers">Number of Travelers</label>
+          <input type="number" id="numTravelers" name="num_travelers" min="1" required>
+        </div>
+        <div class="form-group">
+          <label for="specialRequests">Special Requests (Optional)</label>
+          <textarea id="specialRequests" name="special_requests" rows="4"></textarea>
+        </div>
+        <button type="submit" class="submit-booking">Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+
+  <button class="toggle-admin" onclick="toggleAdmin()">Toggle Admin Panel</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
-    // Package Form Submission Logic
-    document.getElementById("packageForm").addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const packageName = document.getElementById("packageName").value;
-      const destination = document.getElementById("destination").value;
-
-      fetch("/submit-package", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ packageName, destination }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.message);
-          alert("Package details submitted successfully!");
-        })
-        .catch((error) => console.error("Error:", error));
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out',
+      once: true
     });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Remove loading screen
+    window.addEventListener('load', () => {
+      const loading = document.querySelector('.loading');
+      loading.style.opacity = '0';
+      setTimeout(() => {
+        loading.style.display = 'none';
+      }, 500);
+    });
+
+    // Package filtering
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const packageCards = document.querySelectorAll('.package-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+        
+        packageCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category').includes(filter)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      
+      packageCards.forEach(card => {
+        const title = card.querySelector('.package-title').textContent.toLowerCase();
+        const description = card.querySelector('.package-description').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // Modal for Learn More
+    const learnMoreButtons = document.querySelectorAll('.learn-more');
+    learnMoreButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const card = button.closest('.package-card');
+        const title = card.querySelector('.package-title').textContent;
+        alert(`More details about ${title} coming soon!`);
+      });
+    });
+
+    // Booking Modal Functions
+    const modal = document.getElementById('bookingModal');
+    const closeModal = document.querySelector('.close-modal');
+
+    function openBookingModal(packageId) {
+      document.getElementById('packageId').value = packageId;
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    closeModal.onclick = function() {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Form submission
+    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/submit-booking', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          showMessage('Booking submitted successfully! We will contact you shortly.', 'success');
+          e.target.reset();
+          setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }, 3000);
+        } else {
+          showMessage(result.error || 'Failed to submit booking', 'error');
+        }
+      } catch (error) {
+        showMessage('Error submitting booking', 'error');
+      }
+    });
+
+    function showMessage(message, type) {
+      const successMessage = document.getElementById('successMessage');
+      const errorMessage = document.getElementById('errorMessage');
+
+      if (type === 'success') {
+        successMessage.textContent = message;
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 3000);
+      } else {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+        setTimeout(() => {
+          errorMessage.style.display = 'none';
+        }, 3000);
+      }
+    }
+
+    // Admin Panel Toggle
+    function toggleAdmin() {
+      const adminSection = document.getElementById('adminSection');
+      adminSection.style.display = adminSection.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Admin Form Submission
+    document.getElementById('adminForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/submit-package', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          showAdminMessage('Package added successfully!', 'success');
+          e.target.reset();
+          loadPackages(); // Reload packages to show the new one
+        } else {
+          showAdminMessage(result.error || 'Failed to add package', 'error');
+        }
+      } catch (error) {
+        showAdminMessage('Error adding package', 'error');
+      }
+    });
+
+    function showAdminMessage(message, type) {
+      const successMessage = document.getElementById('adminSuccessMessage');
+      const errorMessage = document.getElementById('adminErrorMessage');
+
+      if (type === 'success') {
+        successMessage.textContent = message;
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 3000);
+      } else {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+        setTimeout(() => {
+          errorMessage.style.display = 'none';
+        }, 3000);
+      }
+    }
   </script>
 </body>
 </html>

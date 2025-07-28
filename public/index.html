@@ -3,19 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home - Tour and Travel</title>
+  <title>Welcome - Tour and Travel</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <style>
     body {
+      font-family: 'Poppins', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/index.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: white;
     }
 
     header {
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 0;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
       padding: 10px 0;
+      background: rgba(0, 0, 0, 0.9);
     }
 
     nav ul {
@@ -23,48 +39,216 @@
       padding: 0;
       margin: 0;
       text-align: center;
-    }
-
-    nav ul li {
-      display: inline;
-      margin: 0 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
     }
 
-    nav ul li a:hover {
-      text-decoration: underline;
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00e1ff;
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
     }
 
     .hero {
-      background-image: url('/images/index.jpg');
-      background-size: cover;
-      background-position: center center;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: rgb(247, 246, 246);
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero h1 {
-      font-size: 4em;
-      font-family: 'Courier New', Courier, monospace;
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle, transparent, rgba(0,0,0,0.5));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    h1 {
+      font-size: 4rem;
       margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      animation: fadeInUp 1s ease;
     }
 
-    .hero p {
-      font-size: 1.2em;
-      max-width: 600px;
-      margin: auto;
+    .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      animation: fadeInUp 1s ease 0.3s;
+      animation-fill-mode: both;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      animation: fadeInUp 1s ease 0.6s;
+      animation-fill-mode: both;
+    }
+
+    .cta-button {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .primary-cta {
+      background: #00e1ff;
+      color: #000;
+    }
+
+    .primary-cta:hover {
+      background: #00b3cc;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,225,255,0.3);
+    }
+
+    .secondary-cta {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .secondary-cta:hover {
+      background: white;
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255,255,255,0.3);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .scroll-indicator::before {
+      content: '↓';
+      font-size: 2rem;
+      color: white;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading::after {
+      content: '';
+      width: 50px;
+      height: 50px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #00e1ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 15px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="loading"></div>
+
   <header>
     <nav>
       <ul>
@@ -78,11 +262,55 @@
     </nav>
   </header>
 
-  <div class="hero">
-    <div>
-      <h1>Welcome to Tour & Travel</h1>
-      <p>Explore amazing destinations and travel packages tailored just for you. Discover your next adventure with us!</p>
-    </div>
-  </div>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1 data-aos="fade-up">Explore the World</h1>
+        <p class="tagline" data-aos="fade-up" data-aos-delay="200">Discover breathtaking destinations and create unforgettable memories</p>
+        <div class="cta-buttons" data-aos="fade-up" data-aos-delay="400">
+          <a href="packages.html" class="cta-button primary-cta">View Packages</a>
+          <a href="contact.html" class="cta-button secondary-cta">Contact Us</a>
+        </div>
+      </div>
+      <div class="scroll-indicator"></div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out',
+      once: true
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Remove loading screen
+    window.addEventListener('load', () => {
+      const loading = document.querySelector('.loading');
+      loading.style.opacity = '0';
+      setTimeout(() => {
+        loading.style.display = 'none';
+      }, 500);
+    });
+
+    // Smooth scroll
+    document.querySelector('.scroll-indicator').addEventListener('click', () => {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    });
+  </script>
 </body>
 </html>

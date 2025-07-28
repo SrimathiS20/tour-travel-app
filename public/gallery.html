@@ -5,18 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery - Tour and Travel</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #f4f4f9 0%, #e8e8e8 100%);
       margin: 0;
       padding: 0;
+      min-height: 100vh;
     }
 
     header {
-      background-color: #333;
-      color: white;
-      padding: 10px 0;
+      background: rgba(51, 51, 51, 0.95);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(51, 51, 51, 0.98);
+      padding: 5px 0;
     }
 
     nav ul {
@@ -34,89 +45,201 @@
     nav ul li a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
     }
 
-    nav ul li a:hover {
-      text-decoration: underline;
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #007bff;
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
     }
 
     main {
-      padding: 30px;
+      padding: 100px 30px 30px;
       text-align: center;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       color: #333;
-      margin-bottom: 20px;
+      margin-bottom: 40px;
       text-transform: uppercase;
+      position: relative;
+      display: inline-block;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, #007bff, #00e1ff);
     }
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
       padding: 20px;
-      justify-items: center;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
-    .gallery .gallery-item {
-      text-align: center;
-      background-color: #f9f9f9;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+    .gallery-item {
+      position: relative;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
     }
 
-    .gallery .gallery-item:hover {
-      transform: scale(1.05);
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     }
 
-    .gallery img {
+    .gallery-item img {
       width: 100%;
-      height: auto;
-      border-radius: 10px;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .content-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      padding: 20px;
+      color: white;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover .content-overlay {
+      transform: translateY(0);
     }
 
     .place-name {
-      font-weight: bold;
-      font-size: 1.5rem;
-      margin-top: 10px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .description {
       font-size: 1rem;
-      color: #666;
-      margin: 10px 0;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 15px;
+      line-height: 1.6;
     }
 
     .price {
-      font-size: 1.2rem;
-      color: #007bff;
+      font-size: 1.4rem;
+      color: #00e1ff;
+      font-weight: 600;
       margin-bottom: 10px;
     }
 
-    .offer {
-      color: #ff5733;
-      font-size: 1.1rem;
-      font-weight: bold;
+    .offers-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
     }
 
-    .offers-container {
-      background-color: #f7f7f7;
-      padding: 10px;
+    .offer {
+      color: #ff9100;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* Floating animation */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .gallery-item {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #888;
       border-radius: 5px;
-      margin-top: 15px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Loading animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loading::after {
+      content: '';
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 
 <body>
+  <div class="loading"></div>
+  
   <header>
     <nav>
       <ul>
@@ -131,90 +254,137 @@
   </header>
 
   <main>
-    <h1>Tourist Destination Gallery</h1>
+    <h1 data-aos="fade-down">Explore Dream Destinations</h1>
     <div class="gallery">
-
-      <div class="gallery-item">
-        <img src="images/switzerland.jpg" alt="Switzerland" />
-        <div class="place-name">Switzerland</div>
-        <div class="description">Explore the beautiful landscapes, lakes, and mountains of Switzerland. A place for nature lovers!</div>
-        <div class="price">Price: $2000</div>
-        <div class="offers-container">
-          <div class="offer">Special Offer: 20% off on early bookings!</div>
+      <div class="gallery-item" data-aos="fade-up">
+        <img src="images/switzerland.jpg" alt="Switzerland" loading="lazy" />
+        <div class="content-overlay">
+          <div class="place-name">Switzerland</div>
+          <div class="description">Explore the beautiful landscapes, lakes, and mountains of Switzerland. A place for nature lovers!</div>
+          <div class="price">Price: $2000</div>
+          <div class="offers-container">
+            <div class="offer">Special Offer: 20% off on early bookings!</div>
+          </div>
         </div>
       </div>
 
-      <div class="gallery-item">
-        <img src="images/ireland.jpg" alt="Ireland" />
-        <div class="place-name">Ireland</div>
-        <div class="description">Experience the charm of Irish countryside, castles, and the rolling green hills.</div>
-        <div class="price">Price: $1500</div>
-        <div class="offers-container">
-          <div class="offer">Special Offer: Free guided tour with every booking!</div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+        <img src="images/ireland.jpg" alt="Ireland" loading="lazy" />
+        <div class="content-overlay">
+          <div class="place-name">Ireland</div>
+          <div class="description">Experience the charm of Irish countryside, castles, and the rolling green hills.</div>
+          <div class="price">Price: $1500</div>
+          <div class="offers-container">
+            <div class="offer">Special Offer: Free guided tour with every booking!</div>
+          </div>
         </div>
       </div>
 
-      <div class="gallery-item">
-        <img src="images/bali.jpg" alt="Bali" />
-        <div class="place-name">Bali</div>
-        <div class="description">Visit Bali’s stunning beaches, temples, and vibrant culture. Ideal for relaxation and adventure.</div>
-        <div class="price">Price: $1200</div>
-        <div class="offers-container">
-          <div class="offer">Special Offer: 15% off for honeymoon couples!</div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+        <img src="images/bali.jpg" alt="Bali" loading="lazy" />
+        <div class="content-overlay">
+          <div class="place-name">Bali</div>
+          <div class="description">Visit Bali's stunning beaches, temples, and vibrant culture. Ideal for relaxation and adventure.</div>
+          <div class="price">Price: $1200</div>
+          <div class="offers-container">
+            <div class="offer">Special Offer: 15% off for honeymoon couples!</div>
+          </div>
         </div>
       </div>
 
-      <div class="gallery-item">
-        <img src="images/paris.jpg" alt="Paris" />
-        <div class="place-name">Paris</div>
-        <div class="description">Tour the City of Lights with visits to the Eiffel Tower, Louvre, and more!</div>
-        <div class="price">Price: $1800</div>
-        <div class="offers-container">
-          <div class="offer">Special Offer: Complimentary Seine River Cruise!</div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+        <img src="images/paris.jpg" alt="Paris" loading="lazy" />
+        <div class="content-overlay">
+          <div class="place-name">Paris</div>
+          <div class="description">Tour the City of Lights with visits to the Eiffel Tower, Louvre, and more!</div>
+          <div class="price">Price: $1800</div>
+          <div class="offers-container">
+            <div class="offer">Special Offer: Complimentary Seine River Cruise!</div>
+          </div>
         </div>
       </div>
 
-      <div class="gallery-item">
-        <img src="images/japan.jpg" alt="Japan" />
-        <div class="place-name">Japan</div>
-        <div class="description">Discover the unique culture, technology, and beauty of Japan. Visit temples, Mount Fuji, and more.</div>
-        <div class="price">Price: $2500</div>
-        <div class="offers-container">
-          <div class="offer">Special Offer: Free Tokyo Disneyland ticket!</div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+        <img src="images/japan.jpg" alt="Japan" loading="lazy" />
+        <div class="content-overlay">
+          <div class="place-name">Japan</div>
+          <div class="description">Discover the unique culture, technology, and beauty of Japan. Visit temples, Mount Fuji, and more.</div>
+          <div class="price">Price: $2500</div>
+          <div class="offers-container">
+            <div class="offer">Special Offer: Free Tokyo Disneyland ticket!</div>
+          </div>
         </div>
       </div>
 
-      <div class="gallery-item">
-        <img src="images/newyork.jpg" alt="New York" />
-        <div class="place-name">New York</div>
-        <div class="description">Experience the hustle and bustle of the Big Apple. Enjoy Broadway, Central Park, and iconic landmarks.</div>
-        <div class="price">Price: $2200</div>
-        <div class="offers-container">
-          <div class="offer">Special Offer: 10% off on Broadway show tickets!</div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+        <img src="images/newyork.jpg" alt="New York" loading="lazy" />
+        <div class="content-overlay">
+          <div class="place-name">New York</div>
+          <div class="description">Experience the hustle and bustle of the Big Apple. Enjoy Broadway, Central Park, and iconic landmarks.</div>
+          <div class="price">Price: $2200</div>
+          <div class="offers-container">
+            <div class="offer">Special Offer: 10% off on Broadway show tickets!</div>
+          </div>
         </div>
       </div>
 
-      <div class="gallery-item">
-        <img src="images/sydney.jpg" alt="Sydney" />
-        <div class="place-name">Sydney</div>
-        <div class="description">Discover the beautiful city of Sydney with its Opera House, beaches, and vibrant culture.</div>
-        <div class="price">Price: $1700</div>
-        <div class="offers-container">
-          <div class="offer">Special Offer: Free Sydney Harbour Cruise!</div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+        <img src="images/sydney.jpg" alt="Sydney" loading="lazy" />
+        <div class="content-overlay">
+          <div class="place-name">Sydney</div>
+          <div class="description">Discover the beautiful city of Sydney with its Opera House, beaches, and vibrant culture.</div>
+          <div class="price">Price: $2300</div>
+          <div class="offers-container">
+            <div class="offer">Special Offer: Free Harbor Bridge Climb!</div>
+          </div>
         </div>
       </div>
-
-      <div class="gallery-item">
-        <img src="images/italy.jpg" alt="Italy" />
-        <div class="place-name">Italy</div>
-        <div class="description">Explore the history, art, and cuisine of Italy. Visit Rome, Venice, Florence, and more!</div>
-        <div class="price">Price: $2300</div>
-        <div class="offers-container">
-          <div class="offer">Special Offer: Free guided tours in Rome and Venice!</div>
-        </div>
-      </div>
-
     </div>
   </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Initialize AOS (Animate On Scroll)
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Remove loading screen when page is loaded
+    window.addEventListener('load', () => {
+      const loading = document.querySelector('.loading');
+      loading.style.opacity = '0';
+      setTimeout(() => {
+        loading.style.display = 'none';
+      }, 500);
+    });
+
+    // Lazy loading for images
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.src;
+            observer.unobserve(img);
+          }
+        });
+      });
+
+      images.forEach(img => imageObserver.observe(img));
+    });
+  </script>
 </body>
 </html>

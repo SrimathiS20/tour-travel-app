@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tour and Travel</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/admin.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .admin-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .sidebar {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .sidebar h3 {
+            color: #00e1ff;
+            margin-bottom: 1rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 225, 255, 0.2);
+        }
+
+        .nav-link.active {
+            background: #00e1ff;
+            color: black;
+        }
+
+        .content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00e1ff;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #00e1ff;
+            box-shadow: 0 0 10px rgba(0, 225, 255, 0.3);
+        }
+
+        .submit-btn {
+            background: #00e1ff;
+            color: black;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #00b3cc;
+            transform: translateY(-2px);
+        }
+
+        .package-list {
+            margin-top: 2rem;
+        }
+
+        .package-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .package-item h3 {
+            color: #00e1ff;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .package-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail i {
+            color: #00e1ff;
+        }
+
+        .success-message {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+
+    <main>
+        <div class="admin-container">
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-box"></i>
+                    Manage Packages
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-comments"></i>
+                    View Reviews
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    Contact Messages
+                </a>
+            </div>
+
+            <div class="content">
+                <div class="success-message" id="successMessage"></div>
+                <div class="error-message" id="errorMessage"></div>
+
+                <h2>Add New Package</h2>
+                <form id="packageForm">
+                    <div class="form-group">
+                        <label for="packageName">Package Name</label>
+                        <input type="text" id="packageName" name="package_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" name="destination" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Price ($)</label>
+                        <input type="number" id="price" name="price" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <input type="text" id="duration" name="duration" placeholder="e.g., 7 Days" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meals">Meals</label>
+                        <select id="meals" name="meals" required>
+                            <option value="All Meals">All Meals</option>
+                            <option value="Breakfast Only">Breakfast Only</option>
+                            <option value="Breakfast & Dinner">Breakfast & Dinner</option>
+                            <option value="Not Included">Not Included</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="accommodation">Accommodation</label>
+                        <select id="accommodation" name="accommodation" required>
+                            <option value="5 Star Hotel">5 Star Hotel</option>
+                            <option value="4 Star Hotel">4 Star Hotel</option>
+                            <option value="3 Star Hotel">3 Star Hotel</option>
+                            <option value="Resort">Resort</option>
+                            <option value="Villa">Villa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transportation">Transportation</label>
+                        <select id="transportation" name="transportation" required>
+                            <option value="Flight Included">Flight Included</option>
+                            <option value="Train Included">Train Included</option>
+                            <option value="Bus Included">Bus Included</option>
+                            <option value="Not Included">Not Included</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Family">Family</option>
+                            <option value="Honeymoon">Honeymoon</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Cultural">Cultural</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialOffer">Special Offer (Optional)</label>
+                        <input type="text" id="specialOffer" name="special_offer" placeholder="e.g., 20% OFF">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Add Package</button>
+                </form>
+
+                <div class="package-list">
+                    <h2>Existing Packages</h2>
+                    <div id="packagesList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Form submission
+        document.getElementById('packageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/submit-package', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showMessage('Package added successfully!', 'success');
+                    e.target.reset();
+                    loadPackages();
+                } else {
+                    showMessage(result.error || 'Failed to add package', 'error');
+                }
+            } catch (error) {
+                showMessage('Error submitting package', 'error');
+            }
+        });
+
+        // Load existing packages
+        async function loadPackages() {
+            try {
+                const response = await fetch('/get-packages');
+                const data = await response.json();
+                const packagesList = document.getElementById('packagesList');
+                packagesList.innerHTML = '';
+
+                data.packages.forEach(pkg => {
+                    const packageElement = document.createElement('div');
+                    packageElement.className = 'package-item';
+                    packageElement.innerHTML = `
+                        <h3>${pkg.package_name}</h3>
+                        <div class="package-details">
+                            <div class="detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${pkg.destination}</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>${pkg.price}</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>${pkg.duration}</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-utensils"></i>
+                                <span>${pkg.meals}</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-hotel"></i>
+                                <span>${pkg.accommodation}</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-plane"></i>
+                                <span>${pkg.transportation}</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-tag"></i>
+                                <span>${pkg.category}</span>
+                            </div>
+                        </div>
+                    `;
+                    packagesList.appendChild(packageElement);
+                });
+            } catch (error) {
+                showMessage('Error loading packages', 'error');
+            }
+        }
+
+        // Show message function
+        function showMessage(message, type) {
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (type === 'success') {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            } else {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Load packages on page load
+        loadPackages();
+    </script>
+</body>
+</html> 

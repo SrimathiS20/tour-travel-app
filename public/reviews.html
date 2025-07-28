@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reviews - Tour and Travel</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Reviews - Tour and Travel</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-image: url("images/reviews.jpg");
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/reviews.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      color: white;
+      min-height: 100vh;
     }
 
     header {
-      background-color: rgba(51, 51, 51, 0.8);
-      color: white;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 0;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
       padding: 10px 0;
+      background: rgba(0, 0, 0, 0.95);
     }
 
     nav ul {
@@ -27,100 +40,282 @@
       padding: 0;
       margin: 0;
       text-align: center;
-    }
-
-    nav ul li {
-      display: inline;
-      margin: 0 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
     }
 
-    nav ul li a:hover {
-      text-decoration: underline;
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00e1ff;
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
     }
 
     main {
+      padding: 120px 20px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
       padding: 30px;
+      border-radius: 20px;
       text-align: center;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 10px;
-      max-width: 1000px;
-      margin: 20px auto;
+      transition: all 0.3s ease;
     }
 
-    main h1 {
-      font-size: 2.5rem;
-      color: #333;
-      margin-bottom: 20px;
-      text-transform: uppercase;
+    .stat-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
     }
 
-    .review-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-
-    .review {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      animation: slideIn 1.5s ease-in-out;
-    }
-
-    .review h3 {
-      font-size: 1.5rem;
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #00e1ff;
       margin-bottom: 10px;
-      color: #007bff;
     }
 
-    .review p {
-      font-size: 1rem;
-      color: #333;
-      margin: 10px 0;
+    .stat-label {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
     }
 
-    .rating {
-      font-size: 1.2rem;
-      color: #ffcc00;
-      margin: 5px 0;
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .review-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .review-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 6rem;
+      color: rgba(0, 225, 255, 0.2);
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .review-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .reviewer-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+      border: 2px solid #00e1ff;
     }
 
     .reviewer-name {
-      font-weight: bold;
-      font-style: italic;
-      color: #e63946;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 5px;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
+    .review-date {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .review-rating {
+      color: #ffd700;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .review-text {
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    .review-destination {
+      margin-top: 15px;
+      color: #00e1ff;
+      font-size: 0.9rem;
+    }
+
+    .add-review-section {
+      margin-top: 60px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+    }
+
+    .review-form {
+      display: grid;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 225, 255, 0.3);
+    }
+
+    .star-rating {
+      display: flex;
+      gap: 10px;
+      font-size: 1.5rem;
+    }
+
+    .star-rating i {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .star-rating i:hover {
+      transform: scale(1.2);
+      color: #ffd700;
+    }
+
+    .submit-review {
+      padding: 15px 30px;
+      background: #00e1ff;
+      color: black;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .submit-review:hover {
+      background: #00b3cc;
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 15px;
       }
-      to {
-        opacity: 1;
+
+      .stat-card {
+        padding: 20px;
+      }
+
+      .review-card {
+        padding: 20px;
+      }
+
+      .add-review-section {
+        padding: 20px;
       }
     }
 
-    @keyframes slideIn {
-      from {
-        transform: translateY(30px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading::after {
+      content: '';
+      width: 50px;
+      height: 50px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #00e1ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
+  <div class="loading"></div>
+
   <header>
     <nav>
       <ul>
@@ -135,27 +330,311 @@
   </header>
 
   <main>
-    <h1>Customer Reviews</h1>
-    <div class="review-container">
-      <div class="review">
-        <h3>Beautiful Experience in Bali</h3>
-        <p class="rating">★★★★★</p>
-        <p>"I had an amazing time in Bali! The trip was well-organized, and the sights were breathtaking. Highly recommend this tour to anyone looking to explore Bali!"</p>
-        <p class="reviewer-name">- Sarah L.</p>
+    <h1 data-aos="fade-down" style="text-align: center; font-size: 3rem; margin-bottom: 40px; color: #00e1ff;">Customer Reviews</h1>
+
+    <div class="stats-container">
+      <div class="stat-card" data-aos="fade-up">
+        <div class="stat-number" data-count="500">0</div>
+        <div class="stat-label">Happy Customers</div>
       </div>
-      <div class="review">
-        <h3>Memorable Trip to Switzerland</h3>
-        <p class="rating">★★★★★</p>
-        <p>"Switzerland was a dream come true. The tours were fantastic, and the guides were knowledgeable and friendly. It was truly a once-in-a-lifetime experience!"</p>
-        <p class="reviewer-name">- Mark T.</p>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-number" data-count="4.8">0</div>
+        <div class="stat-label">Average Rating</div>
       </div>
-      <div class="review">
-        <h3>Great Experience in Paris</h3>
-        <p class="rating">★★★★☆</p>
-        <p>"The tour in Paris was great. We got to see all the major attractions, and the food was fantastic. Some tours felt a little rushed, but overall it was a wonderful experience."</p>
-        <p class="reviewer-name">- Emily R.</p>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-number" data-count="50">0</div>
+        <div class="stat-label">Destinations</div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-number" data-count="100">0</div>
+        <div class="stat-label">Tours Completed</div>
       </div>
     </div>
+
+    <div class="reviews-grid">
+      <!-- Review 1 -->
+      <div class="review-card" data-aos="fade-up">
+        <div class="reviewer-info">
+          <img src="https://i.pravatar.cc/150?img=1" alt="Sarah Johnson" class="reviewer-avatar">
+          <div>
+            <div class="reviewer-name">Sarah Johnson</div>
+            <div class="review-date">June 15, 2024</div>
+          </div>
+        </div>
+        <div class="review-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">"An absolutely amazing experience! The Swiss Alps tour was breathtaking, and the service was impeccable. Every detail was perfectly planned."</p>
+        <div class="review-destination">
+          <i class="fas fa-map-marker-alt"></i> Swiss Alps Adventure
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="review-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="reviewer-info">
+          <img src="https://i.pravatar.cc/150?img=2" alt="Michael Chen" class="reviewer-avatar">
+          <div>
+            <div class="reviewer-name">Michael Chen</div>
+            <div class="review-date">June 10, 2024</div>
+          </div>
+        </div>
+        <div class="review-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <p class="review-text">"Paris was magical! The tour guides were knowledgeable and friendly. The evening Eiffel Tower visit was the highlight of our trip."</p>
+        <div class="review-destination">
+          <i class="fas fa-map-marker-alt"></i> Paris Romance
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="review-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="reviewer-info">
+          <img src="https://i.pravatar.cc/150?img=3" alt="Emily Rodriguez" class="reviewer-avatar">
+          <div>
+            <div class="reviewer-name">Emily Rodriguez</div>
+            <div class="review-date">June 5, 2024</div>
+          </div>
+        </div>
+        <div class="review-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">"Bali was a dream come true! The resort was luxurious, and the activities were perfectly balanced between adventure and relaxation."</p>
+        <div class="review-destination">
+          <i class="fas fa-map-marker-alt"></i> Bali Paradise
+        </div>
+      </div>
+    </div>
+
+    <div class="add-review-section" data-aos="fade-up">
+      <h2 style="text-align: center; color: #00e1ff; margin-bottom: 30px;">Share Your Experience</h2>
+      <form class="review-form" id="reviewForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="destination">Destination</label>
+          <input type="text" id="destination" required>
+        </div>
+        <div class="form-group">
+          <label>Rating</label>
+          <div class="star-rating" id="starRating">
+            <i class="far fa-star" data-rating="1"></i>
+            <i class="far fa-star" data-rating="2"></i>
+            <i class="far fa-star" data-rating="3"></i>
+            <i class="far fa-star" data-rating="4"></i>
+            <i class="far fa-star" data-rating="5"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="review">Your Review</label>
+          <textarea id="review" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="submit-review">Submit Review</button>
+      </form>
+    </div>
   </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out',
+      once: true
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Remove loading screen
+    window.addEventListener('load', () => {
+      const loading = document.querySelector('.loading');
+      loading.style.opacity = '0';
+      setTimeout(() => {
+        loading.style.display = 'none';
+      }, 500);
+    });
+
+    // Star rating functionality
+    const starRating = document.getElementById('starRating');
+    const stars = starRating.querySelectorAll('i');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('mouseover', () => {
+        const rating = star.getAttribute('data-rating');
+        highlightStars(rating);
+      });
+
+      star.addEventListener('mouseout', () => {
+        highlightStars(selectedRating);
+      });
+
+      star.addEventListener('click', () => {
+        selectedRating = star.getAttribute('data-rating');
+        highlightStars(selectedRating);
+      });
+    });
+
+    function highlightStars(rating) {
+      stars.forEach(star => {
+        const starRating = star.getAttribute('data-rating');
+        if (starRating <= rating) {
+          star.classList.remove('far');
+          star.classList.add('fas');
+        } else {
+          star.classList.remove('fas');
+          star.classList.add('far');
+        }
+      });
+    }
+
+    // Animate statistics
+    function animateStats() {
+      const stats = document.querySelectorAll('.stat-number');
+      stats.forEach(stat => {
+        const target = parseFloat(stat.getAttribute('data-count'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const animate = () => {
+          current += step;
+          if (current <= target) {
+            stat.textContent = Number.isInteger(target) ? 
+              Math.floor(current) : 
+              current.toFixed(1);
+            requestAnimationFrame(animate);
+          } else {
+            stat.textContent = target;
+          }
+        };
+
+        animate();
+      });
+    }
+
+    // Start animation when elements are in view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    document.querySelectorAll('.stat-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Load existing reviews
+    function loadReviews() {
+      fetch('/get-reviews')
+        .then(response => response.json())
+        .then(data => {
+          const reviewsGrid = document.querySelector('.reviews-grid');
+          reviewsGrid.innerHTML = ''; // Clear existing reviews
+          
+          data.reviews.forEach((review, index) => {
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.setAttribute('data-aos', 'fade-up');
+            if (index > 0) {
+              reviewCard.setAttribute('data-aos-delay', index * 100);
+            }
+            
+            const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+            
+            reviewCard.innerHTML = `
+              <div class="reviewer-info">
+                <img src="https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 70)}" alt="${review.name}" class="reviewer-avatar">
+                <div>
+                  <div class="reviewer-name">${review.name}</div>
+                  <div class="review-date">${new Date(review.created_at).toLocaleDateString()}</div>
+                </div>
+              </div>
+              <div class="review-rating">
+                ${Array(review.rating).fill('<i class="fas fa-star"></i>').join('')}
+                ${Array(5 - review.rating).fill('<i class="far fa-star"></i>').join('')}
+              </div>
+              <p class="review-text">"${review.review_text}"</p>
+              <div class="review-destination">
+                <i class="fas fa-map-marker-alt"></i> ${review.destination}
+              </div>
+            `;
+            
+            reviewsGrid.appendChild(reviewCard);
+          });
+          
+          // Refresh AOS
+          AOS.refresh();
+        })
+        .catch(error => console.error('Error loading reviews:', error));
+    }
+
+    // Load reviews when page loads
+    loadReviews();
+
+    // Form submission
+    document.getElementById('reviewForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const destination = document.getElementById('destination').value;
+      const review_text = document.getElementById('review').value;
+      
+      if (!selectedRating) {
+        alert('Please select a rating');
+        return;
+      }
+
+      fetch('/submit-review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          destination,
+          rating: selectedRating,
+          review_text
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Thank you for your review! It has been published.');
+        e.target.reset();
+        selectedRating = 0;
+        highlightStars(0);
+        loadReviews(); // Reload reviews to show the new one
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting your review. Please try again.');
+      });
+    });
+  </script>
 </body>
 </html>
